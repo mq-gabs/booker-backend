@@ -1,14 +1,14 @@
 package schedulingprofile
 
 type CreateSchedulingProfileDTO struct {
-	Name      string         `json:"name"`
-	Monday    SchedulingHour `json:"monday"`
-	Tuesday   SchedulingHour `json:"tuesday"`
-	Wednesday SchedulingHour `json:"wednesday"`
-	Thursday  SchedulingHour `json:"thursday"`
-	Friday    SchedulingHour `json:"friday"`
-	Saturday  SchedulingHour `json:"saturday"`
-	Sunday    SchedulingHour `json:"sunday"`
+	Name      string          `json:"name"`
+	Monday    *SchedulingHour `json:"monday"`
+	Tuesday   *SchedulingHour `json:"tuesday"`
+	Wednesday *SchedulingHour `json:"wednesday"`
+	Thursday  *SchedulingHour `json:"thursday"`
+	Friday    *SchedulingHour `json:"friday"`
+	Saturday  *SchedulingHour `json:"saturday"`
+	Sunday    *SchedulingHour `json:"sunday"`
 }
 
 type UpdateSchedulingProfileDTO struct {

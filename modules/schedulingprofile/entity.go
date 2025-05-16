@@ -14,14 +14,21 @@ type SchedulingHour struct {
 
 type SchedulingProfile struct {
 	base.BaseEntity
-	Name      string         `json:"name"`
-	Monday    SchedulingHour `json:"monday"`
-	Tuesday   SchedulingHour `json:"tuesday"`
-	Wednesday SchedulingHour `json:"wednesday"`
-	Thursday  SchedulingHour `json:"thursday"`
-	Friday    SchedulingHour `json:"friday"`
-	Saturday  SchedulingHour `json:"saturday"`
-	Sunday    SchedulingHour `json:"sunday"`
+	Name      string          `json:"name"`
+	Monday    *SchedulingHour `json:"monday"`
+	Tuesday   *SchedulingHour `json:"tuesday"`
+	Wednesday *SchedulingHour `json:"wednesday"`
+	Thursday  *SchedulingHour `json:"thursday"`
+	Friday    *SchedulingHour `json:"friday"`
+	Saturday  *SchedulingHour `json:"saturday"`
+	Sunday    *SchedulingHour `json:"sunday"`
+}
+
+func New() *SchedulingProfile {
+	b := base.New()
+	return &SchedulingProfile{
+		BaseEntity: *b,
+	}
 }
 
 func (sh *SchedulingHour) Validate() error {
@@ -38,7 +45,7 @@ func (sp *SchedulingProfile) Validate() error {
 	if strings.TrimSpace(sp.Name) == "" {
 		return errors.New("name is required")
 	}
-	days := []SchedulingHour{
+	days := []*SchedulingHour{
 		sp.Monday, sp.Tuesday, sp.Wednesday, sp.Thursday, sp.Friday, sp.Saturday, sp.Sunday,
 	}
 	for _, day := range days {

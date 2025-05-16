@@ -54,25 +54,25 @@ func (s *SchedulingProfileService) Update(id uuid.UUID, dto UpdateSchedulingProf
 		existing.Name = *dto.Name
 	}
 	if dto.Monday != nil {
-		existing.Monday = *dto.Monday
+		existing.Monday = dto.Monday
 	}
 	if dto.Tuesday != nil {
-		existing.Tuesday = *dto.Tuesday
+		existing.Tuesday = dto.Tuesday
 	}
 	if dto.Wednesday != nil {
-		existing.Wednesday = *dto.Wednesday
+		existing.Wednesday = dto.Wednesday
 	}
 	if dto.Thursday != nil {
-		existing.Thursday = *dto.Thursday
+		existing.Thursday = dto.Thursday
 	}
 	if dto.Friday != nil {
-		existing.Friday = *dto.Friday
+		existing.Friday = dto.Friday
 	}
 	if dto.Saturday != nil {
-		existing.Saturday = *dto.Saturday
+		existing.Saturday = dto.Saturday
 	}
 	if dto.Sunday != nil {
-		existing.Sunday = *dto.Sunday
+		existing.Sunday = dto.Sunday
 	}
 	existing.UpdatedAt = time.Now()
 	if err := existing.Validate(); err != nil {
