@@ -11,7 +11,15 @@ type BaseEntity struct {
 	ID        uuid.UUID  `json:"id"`
 	CreatedAt time.Time  `json:"created_at"`
 	UpdatedAt time.Time  `json:"updated_at"`
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+	DeletedAt *time.Time `json:"deleted_at"`
+}
+
+func New() *BaseEntity {
+	return &BaseEntity{
+		ID:        uuid.New(),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
 }
 
 func (b *BaseEntity) Validate() error {
