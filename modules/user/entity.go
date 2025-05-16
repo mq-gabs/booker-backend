@@ -4,6 +4,7 @@ import (
 	"booker/modules/base"
 	"errors"
 	"net/mail"
+	"strings"
 )
 
 type User struct {
@@ -24,7 +25,7 @@ func (u *User) Validate() error {
 	if err := u.BaseEntity.Validate(); err != nil {
 		return err
 	}
-	if u.Name == "" {
+	if strings.TrimSpace(u.Name) == "" {
 		return errors.New("name is required")
 	}
 	if _, err := mail.ParseAddress(u.Email); err != nil {
