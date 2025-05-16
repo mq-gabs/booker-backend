@@ -13,6 +13,13 @@ type User struct {
 	Password string `json:"password"`
 }
 
+func New() *User {
+	b := base.New()
+	return &User{
+		BaseEntity: *b,
+	}
+}
+
 func (u *User) Validate() error {
 	if err := u.BaseEntity.Validate(); err != nil {
 		return err
