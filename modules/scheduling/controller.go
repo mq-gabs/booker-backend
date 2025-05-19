@@ -11,13 +11,19 @@ type SchedulingController struct {
 	Service *SchedulingService
 }
 
-func NewSchedulingController(r *gin.Engine, service *SchedulingService) {
+func SetRoutes(r *gin.Engine) {
+	repo := NewSchedulingMemoryRepository()
+	service := NewSchedulingService(repo)
+
 	sc := &SchedulingController{Service: service}
-	r.POST("/schedulings", sc.Create)
-	r.GET("/schedulings", sc.List)
-	r.GET("/schedulings/:id", sc.FindOne)
-	r.PUT("/schedulings/:id", sc.Update)
-	r.DELETE("/schedulings/:id", sc.Delete)
+
+	g := r.Group("/scheduling")
+
+	g.POST("/", sc.Create)
+	g.GET("/", sc.List)
+	g.GET("/id", sc.FindOne)
+	g.PUT("/id", sc.Update)
+	g.DELETE("/id", sc.Delete)
 }
 
 func (sc *SchedulingController) Create(c *gin.Context) {

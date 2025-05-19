@@ -11,13 +11,19 @@ type UserController struct {
 	Service *UserService
 }
 
-func NewUserController(r *gin.Engine, service *UserService) {
+func SetRoutes(r *gin.Engine) {
+	repo := NewUserMemoryRepository()
+	service := NewUserService(repo)
+
 	uc := &UserController{Service: service}
-	r.POST("/users", uc.Create)
-	r.GET("/users", uc.List)
-	r.GET("/users/:id", uc.FindOne)
-	r.PUT("/users/:id", uc.Update)
-	r.DELETE("/users/:id", uc.Delete)
+
+	g := r.Group("/users")
+
+	g.POST("/", uc.Create)
+	g.GET("/", uc.List)
+	g.GET("/:id", uc.FindOne)
+	g.PUT("/:id", uc.Update)
+	g.DELETE("/:id", uc.Delete)
 }
 
 func (uc *UserController) Create(c *gin.Context) {

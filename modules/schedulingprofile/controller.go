@@ -11,13 +11,19 @@ type SchedulingProfileController struct {
 	Service *SchedulingProfileService
 }
 
-func NewSchedulingProfileController(r *gin.Engine, service *SchedulingProfileService) {
+func SetRoutes(r *gin.Engine) {
+	repo := NewSchedulingProfileMemoryRepository()
+	service := NewSchedulingProfileService(repo)
+
 	pc := &SchedulingProfileController{Service: service}
-	r.POST("/scheduling-profiles", pc.Create)
-	r.GET("/scheduling-profiles", pc.List)
-	r.GET("/scheduling-profiles/:id", pc.FindOne)
-	r.PUT("/scheduling-profiles/:id", pc.Update)
-	r.DELETE("/scheduling-profiles/:id", pc.Delete)
+
+	g := r.Group("/scheduling-profiles")
+
+	g.POST("/", pc.Create)
+	g.GET("/", pc.List)
+	g.GET("/:id", pc.FindOne)
+	g.PUT("/:id", pc.Update)
+	g.DELETE("/:id", pc.Delete)
 }
 
 func (pc *SchedulingProfileController) Create(c *gin.Context) {
