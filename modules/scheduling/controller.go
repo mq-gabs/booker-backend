@@ -21,9 +21,9 @@ func SetRoutes(r *gin.Engine) {
 
 	g.POST("/", sc.Create)
 	g.GET("/", sc.List)
-	g.GET("/id", sc.FindOne)
-	g.PUT("/id", sc.Update)
-	g.DELETE("/id", sc.Delete)
+	g.GET("/:id", sc.FindOne)
+	g.PUT("/:id", sc.Update)
+	g.DELETE("/:id", sc.Delete)
 }
 
 func (sc *SchedulingController) Create(c *gin.Context) {
